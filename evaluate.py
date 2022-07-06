@@ -15,10 +15,7 @@ def evaluate(predictions, max_char_len, max_seq_length, mode):
         
     f1 = exact_match = total = 0
     
-    # list_sample = InputSample(path=path, max_char_len=max_char_len, max_seq_length=max_seq_length).get_sample()
-    list_sample = []                       
-    with open(path, 'r', encoding='utf8') as f: 
-        list_sample = json.load(f)
+    list_sample = InputSample(path=path, max_char_len=max_char_len, max_seq_length=max_seq_length).get_sample()
     for i, sample in enumerate(list_sample):
         context = sample['context'].split(' ')  
         question = sample['question'].split(' ')  
