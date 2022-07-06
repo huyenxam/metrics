@@ -5,8 +5,8 @@ def f1_score(prediction, ground_truth):
     '''
     Returns f1 score of two strings.
     '''
-    prediction_tokens = normalize_answer(prediction).split(" ")
-    ground_truth_tokens = normalize_answer(ground_truth).split(" ")
+    prediction_tokens = normalize_answer(prediction).split()
+    ground_truth_tokens = normalize_answer(ground_truth).split()
 
     common = Counter(prediction_tokens) & Counter(ground_truth_tokens)
     num_same = sum(common.values())
