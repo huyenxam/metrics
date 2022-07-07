@@ -1,12 +1,6 @@
 import string
 import regex as re
 
-"""
-Chuẩn hóa Unicode tiếng Việt
-
-"""
-
-
 uniChars = "àáảãạâầấẩẫậăằắẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵÀÁẢÃẠÂẦẤẨẪẬĂẰẮẲẴẶÈÉẺẼẸÊỀẾỂỄỆĐÌÍỈĨỊÒÓỎÕỌÔỒỐỔỖỘƠỜỚỞỠỢÙÚỦŨỤƯỪỨỬỮỰỲÝỶỸỴÂĂĐÔƠƯ"
 unsignChars = "aaaaaaaaaaaaaaaaaeeeeeeeeeeediiiiiooooooooooooooooouuuuuuuuuuuyyyyyAAAAAAAAAAAAAAAAAEEEEEEEEEEEDIIIOOOOOOOOOOOOOOOOOOOUUUUUUUUUUUYYYYYAADOOU"
 
@@ -195,12 +189,6 @@ def chuan_hoa_dau_cau_tieng_viet(sentence):
     return ' '.join(words)
 
 
-"""
-
-    Chuẩn hóa khoảng trắng thừa và ký tự đặc biệt
-
-"""
-
 def normalize_answer(s):
     '''
     Performs a series of cleaning steps on the ground truth and 
@@ -218,8 +206,9 @@ def normalize_answer(s):
         return text.lower()
 
     def remove_specialchar(text):
-        char_to_replace = {'_', '° C', '×', '″', '′', "'", '° B', '° F', '°', '(', ')', '−', '–', '/', '%', '‰', '[', ']', ';', ',', '"', ':', '...', '.', '=', '”', '—', '&'}
-        for c in char_to_replace:
-            text = text.replace(c, " ")
+        char_to_replace = {'_': ' ', '" ': '"',' - ':'-', ' – ':'–','° C': '°C', ' × ': '×', '″': ' ″', '′ ': '′', " ' ": "'", '° B':'°B', '° F': '°F', ' ° ': '°', '( ' : '(', ' )':')', '− ': '−', '– ':'–', ' / ': '/', '%': '%', '‰':' ‰', '[ ':'[', '[':' [', ' ]':']', ']':'] ',' ! ':'!',';':' ;', ' , ': ', ', ' "': '"', ' : ':':', ': ':':', ' ... ':'...', ' . ': '. ', '.':' .','= ':'=', ' ”':'”', '— ':'—', '& ':'&', ' – ':'–', ' ,':',', '- ':'-', ' +':'+', ' ?':'?'}
+        for k, v in char_to_replace.items():
+            text = text.replace(k, v)
         return text
-    return white_space_fix(remove_punc(lower(remove_specialchar(s))))
+    # return white_space_fix(remove_punc(lower(remove_specialchar(s))))
+    return white_space_fix((lower(remove_specialchar(s))))
